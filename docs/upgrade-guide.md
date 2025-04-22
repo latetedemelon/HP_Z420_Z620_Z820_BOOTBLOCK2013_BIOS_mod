@@ -169,3 +169,26 @@ Detailed pinouts, clip photos, and `flashrom` commands live in *docs/troubleshoo
 * **Upgrade ME v7→v8** if you skipped it earlier – instructions in *theory.md* appendix.
 
 ---
+
+
+
+---
+## 11 - HP Software Links
+
+Z620, ME7, ME8, BIOS 2.07
+
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59990.html
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59990.exe
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59991.html
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59991.exe
+- https://ftp.hp.com/pub/softpaq/sp59001-59500/sp59186.html
+- https://ftp.hp.com/pub/softpaq/sp59001-59500/sp59186.exe
+
+Z820, ME7, ME8, BIOS 2.07
+
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59992.html
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59992.exe
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59993.html
+- https://ftp.hp.com/pub/softpaq/sp59501-60000/sp59993.exe
+- https://ftp.hp.com/pub/softpaq/sp59001-59500/sp59187.html
+- https://ftp.hp.com/pub/softpaq/sp59001-59500/sp59187.exe
