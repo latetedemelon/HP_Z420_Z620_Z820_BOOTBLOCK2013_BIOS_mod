@@ -15,14 +15,14 @@ _HP Z420 / Z620 / Z820 Boot‑Block 2013 Upgrade_
 
 | Symptom | Most‑likely cause | Where to start |
 |---------|------------------|----------------|
-| **USB stick will not boot** | USB not set first, FreeDOS image bad, UEFI secure‑boot on | § 1.1 |
-| **`flashrom` cannot detect chip** | Bad clip contact, wrong pin‑out, board still powered | § 2 |
-| **Write succeeds but verify fails** | Weak 3 V3 rail, passive drain from board | § 2.4 |
-| **Board powers on but no POST beeps / codes** | Corrupted boot‑block region | § 3 |
-| **“ME in Manufacturing Mode” every boot** | ME region was touched / header left bridged | § 4 |
-| **Only one NIC appears / MAC duplicates** | GbE addresses overwritten | § 5 |
-| **v2 Xeon shows 0 × 000000000 (CPUID 0) or reboots** | Still on ME 7 or BIOS < 3.50 | § 6 |
-| **`FPT` says “locked flash region”** | E14 / E1 jumper not set, early PCB revision lacks E14 | § 2.5 |
+| **USB stick will not boot** | USB not set first, FreeDOS image bad, UEFI secure‑boot on | ### 1.1 |
+| **`flashrom` cannot detect chip** | Bad clip contact, wrong pin‑out, board still powered | ## 2 |
+| **Write succeeds but verify fails** | Weak 3 V3 rail, passive drain from board | ### 2.4 |
+| **Board powers on but no POST beeps / codes** | Corrupted boot‑block region | ## 3 |
+| **“ME in Manufacturing Mode” every boot** | ME region was touched / header left bridged | ## 4 |
+| **Only one NIC appears / MAC duplicates** | GbE addresses overwritten | ## 5 |
+| **v2 Xeon shows 0 × 000000000 (CPUID 0) or reboots** | Still on ME 7 or BIOS < 3.50 | ## 6 |
+| **`FPT` says “locked flash region”** | E14 / E1 jumper not set, early PCB revision lacks E14 | ### 2.5 |
 
 ---
 
@@ -93,7 +93,7 @@ flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=512
 
 ## 5  NIC MAC address issues
 
-The two onboard NICs use **three** stored MACs (see addresses in PDF) citeturn0file0.  
+The two onboard NICs use **three** stored MACs (see addresses in PDF).  
 If only one NIC shows or both share an address:
 
 1. Read a **good** dump from another identical board _or_ copy the original MACs you recorded.  
@@ -114,7 +114,7 @@ If only one NIC shows or both share an address:
 | Boot‑block date still 2011 | Re‑do the clip flash; verify in BIOS ‑> System Info (should read **03/06/2013**). |
 | BIOS version < 3.50 | Update to 3.85 from FreeDOS. |
 | ME still v7, BIOS ≥ 3.88 | Flash ME 8 using the SoftPaq **SP82684** (DOS tools) or patch ME region in a dump and re‑flash. |
-| AMT enabled while ME v7 + v2 CPU | Disable AMT, or move E1 jumper to force ME off (see test‑notes) citeturn0file1. |
+| AMT enabled while ME v7 + v2 CPU | Disable AMT, or move E1 jumper to force ME off (see test‑notes). |
 
 ---
 
@@ -140,9 +140,5 @@ If it still fails, the chip itself may be damaged—replace with a blank W25Q128
 ## 9  Useful Links
 
 * Upgrade‑guide.md § numbers referenced above  
-* PDF Boot‑Block Upgrade Guide (rev 1.02) citeturn0file0  
-* HP forum threads (Manufacturing Mode & ME flash) citeturn0file2
-
----
-
-**End of file**
+* PDF Boot‑Block Upgrade Guide (rev 1.02)
+* HP forum threads (Manufacturing Mode & ME flash) 
