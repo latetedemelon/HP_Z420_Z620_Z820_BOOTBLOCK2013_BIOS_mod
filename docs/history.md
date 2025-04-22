@@ -10,12 +10,12 @@ This page chronicles the community’s multi‑year effort to unlock Ivy‑Bridg
 | ---- | --------- | --------------------- |
 | **2011 Mar** | HP launches *Z420/Z620/Z820* with **2011 Boot Block** and Sandy‑Bridge‑EP Xeons. | HP marketing materials & BIOS dumps (board silkscreen 61826x‑001). |
 | **2013 Jun** | “v2” refresh ships with **Boot Block 2013** and Ivy‑Bridge‑EP CPUs; BIOS rev 3.50 introduces requisite microcode. | HP SoftPaq 3.50 changelog. |
-| **2015–2018** | Early tinkerers desolder SPI flash and program Boot Block 2013 with CH341A clips.  Success confirmed but process viewed as **high‑risk**. | Assorted HP forum posts; see PDF guide. citeturn0file0 |
+| **2015–2018** | Early tinkerers desolder SPI flash and program Boot Block 2013 with CH341A clips.  Success confirmed but process viewed as **high‑risk**. | Assorted HP forum posts; see PDF guide.  |
 | **2019 Nov** | **HashsumCollision** publishes *Zx20 Boot Block Upgrade Guide v1.02* – first comprehensive *hardware* flashing tutorial. | PDF v1.02.  |
 | **2021 Jan** | **SuperThunder** hosts GitHub repo detailing address offsets, jumper usage, and adds NVMe DXE + Re‑Size BAR patches to BIOS 3.96. | Original GitHub README. |
-| **2024 Apr–May** | **silentbogo** & **bibikalka** discover a **software‑only path**: chaining ME 7→8 flash, BIOS 2.07 downgrade, and FDO + E14 jumpers to enter **Manufacturing Mode**, allowing Boot Block writes via FPT. | TechPowerUp *Workstation Owners Club*, page 13 posts #324‑325. citeturn0file2 |
+| **2024 Apr–May** | **silentbogo** & **bibikalka** discover a **software‑only path**: chaining ME 7→8 flash, BIOS 2.07 downgrade, and FDO + E14 jumpers to enter **Manufacturing Mode**, allowing Boot Block writes via FPT. | TechPowerUp *Workstation Owners Club* |
 | **2024 Jul** | Community confirms the method works on Z420, Z620, and Z820 Rev 3 without desoldering; scripts and pre‑cropped images added to repo. | GitHub release notes (J6Y/J8Y 3.96+ variants). |
-| **2025 Apr** | This documentation library consolidates PDF theory, forum breakthroughs, and GitHub scripts into a coherent guide set. | You are here. |
+| **2025 Apr** | This documentation library consolidates different sources into a coherent guide set. |  |
 
 ---
 
