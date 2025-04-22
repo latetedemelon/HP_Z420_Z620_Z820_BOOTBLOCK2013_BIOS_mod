@@ -115,8 +115,47 @@ fpt.exe -A 0xFF0000 -L 0x010000 -F B13V620.bin   :: change 6→4 or 8 for your 
 Expect ≈ 30 s. Do **not** interrupt power.
 
 ---
+## 5‑A  Upgrade **Intel Management Engine** to v8.x (Optional but highly recommended)
 
-## 5  Flash the Modded BIOS Region
+> **Why now?**  
+> ME can only be written while the board is still in Manufacturing Mode.  
+>  
+> **What happens if you skip it?**  
+> *v2* CPUs still boot on BIOS 3.85 with ME 7, but BIOS 3.88 + refuses to POST and AMT features break – see test matrix.
+
+### 5.1 Grab the HP SoftPaq  
+* Z420/Z620 – **SP82684** (`ME_8.1.72.3002_DOS.zip`)  
+* Z820      – **SP82685** (same payload, Z820 INF)  
+Both packages contain **`FWUpdLclMe8.exe`** and the binary **`8.1.72.3002.bin`**.
+
+### 5.2 Copy files to the USB  
+```
+\IMET8\FWUpdLclMe8.exe
+\IMET8\8.1.72.3002.bin
+```
+
+### 5.3 Flash the ME region (FreeDOS)
+Make sure **E14 BB is still jumpered** and **FDO** is in write‑enable.
+
+```dos
+C:
+cd \IMET8
+FWUpdLclMe8.exe -F 8.1.72.3002.bin -allowsv
+```
+*Run time ≈ 20 s. You should see “Update successful, reboot required”.*
+
+### 5.4 Hard‑reset the PCH
+Immediately issue:
+```dos
+fpt.exe -greset
+```
+The workstation powers off; wait 10 s, then power it back on but **stay in FreeDOS** for the next step.
+
+*(If the command errors, just power‑cycle manually – the ME will finish initializing on the next cold boot.)*
+
+---
+
+## 6  Flash the Modded BIOS Region 
 1. Pick the cropped file that matches your board & microcode choice, e.g. `cJ6Y_0396_NRE_mc96p.bin`.  Rename to **CJ6Y.BIN**.
 2. Flash only the BIOS region:
    ```dos
@@ -125,34 +164,40 @@ Expect ≈ 30 s. Do **not** interrupt power.
 
 ---
 
-## 6  Exit Manufacturing Mode & Clean‑Up
+
+## 7  Exit Manufacturing Mode & Clean‑Up
+
+**(Note: Skip restoring the ME region if you upgraded to ME v8)**
+
 ```dos
 cd IMET8
-fpt.exe -ME  -F MEOO11.bin   :: restore original ME region
+fpt.exe -ME  -F MEOO11.bin   :: restore original ME region 
 fpt.exe -GBE -F GBEO11.bin   :: restore GbE region
 ```
-Power off → remove **both** jumpers → press **CMOS clear** for 10 s → reconnect AC.
+Power off → remove **both** jumpers (**E14** and **FDO**) → press **CMOS clear** for 10 s → reconnect AC.
 
 Boot to BIOS (F10) → File → System Information:
 * *Boot Block Date = 03/06/2013* ✔
 * BIOS 3.96/3.96+ ✔
-* ME 8.x ✔ (optional but recommended)
+* **Firmware Interface → ME Version = 8.1.72.3002** ✔ (if completed)
 
 Now shut down, install your **v2 Xeon**, and enjoy.
 
 ---
 
-## 7  Flash Commands – Quick Reference
+## 8  Flash Commands – Quick Reference
 ```
 fpt.exe -D BACKUP.BIN                 :: full‑chip dump
 fpt.exe -ME  -F ME8_396i.BIN          :: write only the ME region
+
+FWUpdLclMe8.exe -F 8.1.72.3002.bin    :: ME v8 flash (in MFG‑Mode)
 fpt.exe -A 0xFF0000 -L 0x010000 -F BB.bin  :: Boot Block
 fpt.exe -A 0x580000 -L 0xA70000 -F BIOS.bin :: BIOS region
 ```
 
 ---
 
-## 8  Hardware‑Programmer Path (Rev 1/2 boards or brick recovery)
+## 9  Hardware‑Programmer Path (Rev 1/2 boards or brick recovery)
 1. Solder or clamp a **SOIC‑16 clip** to the SPI flash (Winbond W25Q128 etc.).
 2. Use `flashrom` with a **CH341A** or **Raspberry Pi** to:
    * dump → edit Boot Block & ME in HxD/UEFITool → verify checksums
@@ -163,14 +208,10 @@ Detailed pinouts, clip photos, and `flashrom` commands live in *docs/troubleshoo
 
 ---
 
-## 9  What’s Next?
+## 10  What’s Next?
 * **Enable NVMe boot** – simply plug your PCIe SSD, create a GPT OS disk, and it shows up in UEFI boot order.
 * **Toggle Re‑Size BAR** – BIOS → Advanced → PCI settings.
-* **Upgrade ME v7→v8** if you skipped it earlier – instructions in *theory.md* appendix.
-
----
-
-
+* **Upgrade ME v7→v8** if you skipped it earlier
 
 ---
 ## 11 - HP Software Links
